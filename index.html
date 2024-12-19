@@ -13,6 +13,7 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
+            overflow: hidden;
         }
 
         .container {
@@ -21,6 +22,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
         }
 
         button {
@@ -42,6 +44,25 @@
             margin-top: 20px;
             font-size: 18px;
             color: #333;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        #factImage {
+            width: 100px;
+            height: 100px;
+            margin-top: 20px;
+            border-radius: 50%;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -49,25 +70,28 @@
     <div class="container">
         <h1>Fun Fact Generator</h1>
         <button id="generateFactBtn">Generate Fun Fact</button>
+        <img id="factImage" src="https://via.placeholder.com/100" alt="Fact Image">
         <p id="factDisplay"></p>
     </div>
     <script>
         const facts = [
-            "Honey never spoils.",
-            "A day on Venus is longer than a year on Venus.",
-            "Bananas are berries, but strawberries aren't.",
-            "There are more stars in the universe than grains of sand on Earth.",
-            "Octopuses have three hearts.",
-            "The Eiffel Tower can be 15 cm taller during the summer.",
-            "Some cats are allergic to humans.",
-            "A group of flamingos is called a 'flamboyance'.",
-            "The unicorn is the national animal of Scotland.",
-            "A jiffy is an actual unit of time."
+            { text: "Honey never spoils.", image: "https://via.placeholder.com/100/FF0000" },
+            { text: "A day on Venus is longer than a year on Venus.", image: "https://via.placeholder.com/100/00FF00" },
+            { text: "Bananas are berries, but strawberries aren't.", image: "https://via.placeholder.com/100/0000FF" },
+            { text: "There are more stars in the universe than grains of sand on Earth.", image: "https://via.placeholder.com/100/FFFF00" },
+            { text: "Octopuses have three hearts.", image: "https://via.placeholder.com/100/FF00FF" },
+            { text: "The Eiffel Tower can be 15 cm taller during the summer.", image: "https://via.placeholder.com/100/00FFFF" },
+            { text: "Some cats are allergic to humans.", image: "https://via.placeholder.com/100/FF8800" },
+            { text: "A group of flamingos is called a 'flamboyance'.", image: "https://via.placeholder.com/100/8800FF" },
+            { text: "The unicorn is the national animal of Scotland.", image: "https://via.placeholder.com/100/0088FF" },
+            { text: "A jiffy is an actual unit of time.", image: "https://via.placeholder.com/100/FF0088" }
         ];
 
         document.getElementById('generateFactBtn').addEventListener('click', function() {
             const randomIndex = Math.floor(Math.random() * facts.length);
-            document.getElementById('factDisplay').textContent = facts[randomIndex];
+            const fact = facts[randomIndex];
+            document.getElementById('factDisplay').textContent = fact.text;
+            document.getElementById('factImage').src = fact.image;
         });
     </script>
 </body>
